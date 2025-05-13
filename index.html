@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistema de Pedidos - Lanchonete</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dark-mode">
+  <header>
+    <h1>🥪 Sanduíches Delícia</h1>
+    <button id="toggle-theme">🌞 Modo Claro</button>
+    <div id="user-info">Login necessário</div>
+  </header>
+
+  <main id="app">
+    <section id="login-section">
+      <h2>Login</h2>
+      <button onclick="loginGoogle()">Entrar com Google</button>
+      <button onclick="toggleLoginForm()">Entrar com Email/Senha</button>
+      <form id="email-login" style="display:none;">
+        <input type="email" placeholder="Email" id="email" required />
+        <input type="password" placeholder="Senha" id="senha" required />
+        <button type="button" onclick="loginEmailSenha()">Entrar</button>
+      </form>
+    </section>
+
+    <!-- CADASTRO CLIENTE -->
+    <section id="cadastro-cliente" class="hidden">
+      <h2>Cadastro de Cliente</h2>
+      <form id="form-cliente">
+        <input type="text" placeholder="Nome" required>
+        <input type="tel" placeholder="Telefone" required>
+        <input type="text" placeholder="Endereço" required>
+        <button type="submit">Cadastrar Cliente</button>
+      </form>
+    </section>
+
+    <!-- REGISTRO DE PEDIDO -->
+    <section id="registro-pedido" class="hidden">
+      <h2>Fazer Pedido</h2>
+      <form id="form-pedido">
+        <select>
+          <option value="x-burger">X-Burger - R$15,00</option>
+          <option value="x-salada">X-Salada - R$17,00</option>
+          <option value="x-frango">X-Frango - R$16,00</option>
+        </select>
+        <input type="number" value="1" min="1" />
+        <select name="forma-pagamento">
+          <option value="dinheiro">Dinheiro</option>
+          <option value="pix">PIX</option>
+          <option value="cartao">Cartão</option>
+        </select>
+        <input type="number" placeholder="Troco para quanto?" id="troco" />
+        <button type="button" onclick="adicionarPedido()">Registrar Pedido</button>
+      </form>
+    </section>
+
+    <!-- LISTA DE PEDIDOS -->
+    <section id="lista-pedidos" class="hidden">
+      <h2>Pedidos Registrados</h2>
+      <ul id="pedidos"></ul>
+      <button onclick="imprimirPedidos()">Imprimir</button>
+    </section>
+
+    <!-- FUNCIONÁRIOS DE ENTREGA -->
+    <section id="funcionarios" class="hidden">
+      <h2>Cadastro de Entregadores</h2>
+      <form id="form-funcionario">
+        <input type="text" placeholder="Nome do Entregador" required>
+        <input type="tel" placeholder="Telefone" required>
+        <button type="submit">Cadastrar</button>
+      </form>
+    </section>
+
+    <!-- DASHBOARD ADMINISTRATIVO -->
+    <section id="dashboard" class="hidden">
+      <h2>Dashboard Administrativo</h2>
+      <select id="filtro-status" onchange="filtrarPedidos()">
+        <option value="">Todos</option>
+        <option value="pendente">Pendente</option>
+        <option value="em-preparo">Em Preparo</option>
+        <option value="enviado">Enviado</option>
+        <option value="concluido">Concluído</option>
+      </select>
+      <ul id="lista-dashboard"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="firebase-init.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
